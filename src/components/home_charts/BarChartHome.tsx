@@ -58,25 +58,22 @@ export function BarChartHome({ chartData, currency }: Props) {
                     </CardDescription>
                 </div>
                 <div className="flex">
-                    {["income", "expense"].map((key) => {
-                        const chart = key as keyof typeof chartConfig
-                        return (
-                            <button
-                                key={chart}
-                                data-active={activeChart === chart}
-                                className="data-[active=true]:bg-muted/50 relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
-                                onClick={() => setActiveChart(chart)}
-                            >
-                                <span className="text-muted-foreground text-xs">
-                                    {chartConfig[chart].label}
-                                </span>
-                                <span className="text-lg leading-none font-bold sm:text-3xl">
-                                    {currency.symbol}
-                                    {total[chart].toLocaleString()}
-                                </span>
-                            </button>
-                        )
-                    })}
+                    {(["income", "expense"] as Array<keyof typeof total>).map((chart) => (
+                        <button
+                            key={chart}
+                            data-active={activeChart === chart}
+                            className="data-[active=true]:bg-muted/50 relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l sm:border-t-0 sm:border-l sm:px-8 sm:py-6"
+                            onClick={() => setActiveChart(chart)}
+                        >
+                            <span className="text-muted-foreground text-xs">
+                                {chartConfig[chart].label}
+                            </span>
+                            <span className="text-lg leading-none font-bold sm:text-3xl">
+                                {currency.symbol}
+                                {total[chart].toLocaleString()}
+                            </span>
+                        </button>
+                    ))}
                 </div>
             </CardHeader>
 
@@ -119,13 +116,17 @@ export function BarChartHome({ chartData, currency }: Props) {
                                             year: "numeric",
                                         })
                                     }
-                                    valueFormatter={(value) =>
-                                        `${currency.symbol}${Number(value).toLocaleString()}`
-                                    }
                                 />
                             }
                         />
-                        <Bar dataKey={activeChart} fill={chartConfig[activeChart].color} />
+                        <Bar
+                            dataKey={activeChart}
+                            fill={
+                                (activeChart === "income" || activeChart === "expense")
+                                    ? chartConfig[activeChart].color
+                                    : "#8884d8"
+                            }
+                        />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
