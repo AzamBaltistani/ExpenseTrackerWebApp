@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router";
 import Home from "./pages/Home";
 import Incomes from "./pages/Incomes";
 import Expenses from "./pages/Expenses";
@@ -7,7 +7,7 @@ import Search from "./pages/Search";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route index path="/ExpenseTrackerWebApp/" element={<Home />} />
       <Route path="/incomes" element={<Incomes />} />
       <Route path="/expenses" element={<Expenses />} />
       <Route path="/search" element={<Search />} />

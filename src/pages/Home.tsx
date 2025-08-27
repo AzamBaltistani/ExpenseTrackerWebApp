@@ -108,7 +108,6 @@ const Home = () => {
         const merged = mergeIncomeExpenseByDate(parsedIncomes, parsedExpenses);
         setMergedData(merged);
 
-        console.log("Merged Data:", merged);
     }, []);
 
     return (

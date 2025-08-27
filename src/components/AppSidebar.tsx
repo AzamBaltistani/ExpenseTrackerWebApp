@@ -1,5 +1,5 @@
 import { Calendar, Home, Inbox, Search } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import {
     Sidebar,
@@ -17,7 +17,7 @@ import {
 const items = [
     {
         title: "Home",
-        url: "/",
+        url: "/ExpenseTrackerWebApp/",
         icon: Home,
     },
     {
